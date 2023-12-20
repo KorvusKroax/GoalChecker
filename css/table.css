@@ -49,6 +49,11 @@ td.checkbox {
     border-right: 1px solid rgba(0, 0, 0, .05);
 }
 
-.today {
+.tableContainer.editable .today {
     scale: 1.5;
+}
+
+.tableContainer.editable td.goal:hover {
+    background-color: rgba(255, 255, 255, .5);
+    cursor: pointer;
 }

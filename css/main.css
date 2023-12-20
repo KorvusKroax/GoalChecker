@@ -56,55 +56,12 @@ img {
     filter: drop-shadow(rgba(9, 30, 66, 0.25) 1px 3px 1px);
 }
 
-/* .actions {
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.info {
-    display: flex;
-    justify-content: center;
-    align-items: baseline;
-    margin-top: .5rem;
-}
-
-.info > * {
-    margin-inline: .25rem;;
-} */
 
 
-
-
-
-
-/* input {
+input {
     padding: .25em;
     font-size: 1em;
     background-color: rgba(255, 255, 255, 1);
     color: var(--text-color);
     border-radius: .25em;
-} */
-
-
-
-/* dialog {
-    width: 30rem;
-    margin: auto;
-    padding: 1rem;
-    background-color: var(--background-color);
-    border: none;
 }
-
-dialog::backdrop {
-    background-color: rgba(0, 0, 0, .75);
-}
-
-.goalOption {
-    padding: .5rem;
-    display: flex;
-    justify-content: space-between;
-}
-
-.goalOption:hover {
-    background-color: lightskyblue;
-} */

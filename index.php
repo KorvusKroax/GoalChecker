@@ -25,9 +25,10 @@
         <!-- <link rel="stylesheet" href="css/footer_to_bottom.css"> -->
         <link rel="stylesheet" href="css/table.css">
         <link rel="stylesheet" href="css/checkbox.css">
-        <link rel="stylesheet" href="css/button.css">
+        <!-- <link rel="stylesheet" href="css/button.css"> -->
 
         <script src="js/updateTable.js" defer></script>
+        <script src="js/editTable.js" defer></script>
 
         <title>GoalChecker</title>
     </head>
@@ -37,6 +38,11 @@
         <main>
             <div class="container">
                 <?php
+                    $editable = true;
+                    $checkerTable = array_shift($allTables);
+                    require('checkerTable.php');
+
+                    $editable = false;
                     foreach ($allTables as $checkerTable) {
                         require('checkerTable.php');
                     }

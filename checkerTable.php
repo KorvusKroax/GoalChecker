@@ -1,16 +1,14 @@
 <?php
-    $getGoldenBorder = true;
+    $totalChecked = 0;
+    $checkboxCount = 0;
     foreach ($checkerTable['goals'] as $goal) {
         foreach ($goal['days'] as $day) {
-            if (!$day) {
-                $getGoldenBorder = false;
-                break;
-            }
+            if ($day) $totalChecked++;
+            $checkboxCount++;
         }
-        if (!$getGoldenBorder) break;
     }
+    $getGoldenBorder = $totalChecked == $checkboxCount;
 
-    $getMedal = [];
     foreach ($checkerTable['goals'][0]['days'] as $day => $checked) {
         $getMedal[$day] = true;
     }
@@ -18,7 +16,9 @@
     $caption = explode('/', $checkerTable['caption']);
 ?>
 
-<div class="tableContainer <?= $getGoldenBorder ? 'goldenBorder' : '' ?>" data-id="<?= $checkerTable['id'] ?>">
+
+
+<div class="tableContainer <?= $getGoldenBorder ? 'goldenBorder' : '' ?> <?= $editable ? 'editable' : '' ?>" data-id="<?= $checkerTable['id'] ?>">
     <table>
         <caption>
             <div>
@@ -29,19 +29,22 @@
         <thead>
             <th></th>
             <?php foreach ($checkerTable['goals'][0]['days'] as $day => $checked)  {
-                echo '<th'.(($date == $checkerTable['caption'] && $today == $day) ? ' class="today"' : '').'>'.$weekDays[$day].'</th>';
+                echo '<th'.($today == $day ? ' class="today"' : '').'>'.$weekDays[$day].'</th>';
             } ?>
             <th></th>
         </thead>
 
         <tbody>
             <?php foreach ($checkerTable['goals'] as $row => $goal) : ?>
-                <tr>
-                    <td class="goal"><?= $goal['goal'] ?></th>
+                <tr data-row="<?= $row ?>">
+                    <td class="goal" onClick="editGoal(<?= $checkerTable['id'] ?>, <?= $row ?>)">
+                        <span><?= $goal['goal'] ?></span>
+                        <input hidden type="text" value="<?= $goal['goal'] ?>" onChange="updateGoal(<?= $checkerTable['id'] ?>, <?= $row ?>)">
+                    </td>
 
                     <?php $getTrophy = true; ?>
                     <?php foreach ($goal['days'] as $day => $checked) : ?>
-                        <td class="checkbox <?= ($date == $checkerTable['caption'] && $today == $day) ? 'today' : '' ?>">
+                        <td class="checkbox <?= $today == $day ? 'today' : '' ?>">
                             <label>
                                 <input type="checkbox" <?= $checked ? 'checked' : '' ?>
                                     data-row="<?= $row ?>"
@@ -77,6 +80,6 @@
 
     <hr>
     <div class="stats">
-        Teljesítmény:<h1>100%</h1>
+        Teljesítmény:<h1><?= floor(($totalChecked / $checkboxCount) * 100) ?>%</h1>
     </div>
 </div>
