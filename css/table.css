@@ -1,0 +1,54 @@
+.tableContainer {
+    width: fit-content;
+    margin-inline: auto;
+    margin-bottom: 3rem;
+    padding: 1.5rem 3rem;
+    box-shadow: rgb(38, 57, 77) 0px 10px 20px -10px;
+}
+
+.goldenBorder {
+    outline: 10px solid rgb(218, 165, 32);
+    outline-style: outset;
+    background-color: rgba(218, 165, 32, .2);
+}
+
+table {
+    border-collapse: collapse;
+}
+
+caption {
+    padding: 1em;
+}
+
+caption > div {
+    display: flex;
+    justify-content: space-between;
+}
+
+thead {
+    height: 2rem;
+    background-color: rgba(0, 0, 0, .1);
+}
+
+td {
+    min-width: 3rem;
+    height: 3rem;
+}
+
+td.goal {
+    padding-inline: 1rem;
+    text-align: right;
+    line-height: 1.25em;
+    hyphens: auto;
+    white-space: nowrap;
+}
+
+td.goal,
+td.checkbox {
+    border-bottom: 1px solid rgba(0, 0, 0, .05);
+    border-right: 1px solid rgba(0, 0, 0, .05);
+}
+
+.today {
+    scale: 1.5;
+}
