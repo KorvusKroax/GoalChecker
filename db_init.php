@@ -1,7 +1,7 @@
 <?php
 
     define("DB_DRIVER", "mysql");
-    define("DB_NAME", "checkers");
+    define("DB_NAME", "checker");
     // define("DB_HOST", "optometeroptika.hu");
     // define("DB_USER", "vr69qz86");
     // define("DB_PASSWORD", "Hd1r-X}}Nd");
