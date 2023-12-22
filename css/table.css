@@ -43,6 +43,11 @@ td.goal {
     white-space: nowrap;
 }
 
+td.newGoal {
+    padding-inline: 1rem;
+    text-align: right;
+}
+
 td.goal,
 td.checkbox {
     border-bottom: 1px solid rgba(0, 0, 0, .05);

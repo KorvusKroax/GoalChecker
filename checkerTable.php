@@ -67,9 +67,12 @@
             <?php endforeach; ?>
 
             <tr>
-                <td></td>
+                <td class="newGoal">
+                    <button <?= !$editable ? 'hidden' : '' ?> class="full" onClick="newGoal(<?= $checkerTable['id'] ?>)">ÚJ</button>
+                    <input hidden type="text" onChange="addGoal(<?= $checkerTable['id'] ?>)">
+                </td>
                 <?php foreach ($checkerTable['goals'][0]['days'] as $day => $checked) : ?>
-                    <td class="medal" data-day="<?= $day ?>">
+                    <td class="medal <?= $today == $day ? 'today' : '' ?>" data-day="<?= $day ?>">
                         <span <?= !$getMedal[$day] ? 'hidden' : '' ?>><img src="img/medal.svg" alt="medal"></span>
                     </td>
                 <?php endforeach; ?>
