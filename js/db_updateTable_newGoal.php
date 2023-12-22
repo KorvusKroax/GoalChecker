@@ -7,9 +7,11 @@
 
     $checkerTable = getCheckerTableById($id);
 
+    $lastColorIndex = end($checkerTable['goals'])['colorIndex'];
+
     $checkerTable['goals'][] = [
         'goal' => $goal,
-        'color' => $goalColors[($goalColorPointer++) % count($goalColors)],
+        'colorIndex' => ($lastColorIndex + 1) % count($colors),
         'days' => ['mon' => false, 'tue' => false, 'wed' => false, 'thu' => false, 'fri' => false, 'sat' => false, 'sun' => false]
     ];
 

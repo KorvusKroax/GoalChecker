@@ -58,9 +58,7 @@ function updateGoal(id, row)
             if (tr != null) {
                 table.deleteRow(tr.rowIndex);
                 updateDatabase_delete(id, row);
-                updateAllMedals(id);
-                updateStats(id);
-                // location.reload();
+                location.reload();
             }
         }
     }

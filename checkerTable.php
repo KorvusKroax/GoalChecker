@@ -49,7 +49,7 @@
                                     data-row="<?= $row ?>"
                                     data-day="<?= $day ?>"
                                     onChange="updateCheckbox(<?= $checkerTable['id'] ?>, <?= $row ?>, '<?= $day ?>')">
-                                <span class="checkmark" style="--color: <?= $goal['color'] ?>"></span>
+                                <span class="checkmark" style="--color: <?= $colors[$goal['colorIndex']] ?>"></span>
                             </label>
                         </td>
 

@@ -28,22 +28,6 @@ function updateMedal(id, day)
     }
 }
 
-function updateAllMedals(id)
-{
-    table = document.querySelector('[data-id="' + id + '"] table');
-    if (table) {
-        ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'].forEach((day) => {
-            dayFull = true;
-            table.querySelectorAll('[data-row][data-day="' + day + '"]').forEach((checkbox) => {
-                if (!checkbox.checked) dayFull = false;
-            });
-            medal = table.querySelector('.medal[data-day="' + day + '"] span');
-            if (dayFull) medal.removeAttribute('hidden');
-            else medal.setAttribute('hidden', '');
-        });
-    }
-}
-
 function updateTrophy(id, row)
 {
     table = document.querySelector('[data-id="' + id + '"] table');

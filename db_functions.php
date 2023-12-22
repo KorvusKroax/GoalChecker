@@ -111,7 +111,7 @@
         foreach ($tables[0]['goals'] as $row) {
             $goals[] = [
                 'goal' => $row['goal'],
-                'color' => $row['color'],
+                'colorIndex' => $row['colorIndex'],
                 'days' => ['mon' => false, 'tue' => false, 'wed' => false, 'thu' => false, 'fri' => false, 'sat' => false, 'sun' => false]
             ];
         }
