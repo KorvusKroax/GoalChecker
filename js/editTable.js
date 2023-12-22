@@ -18,17 +18,25 @@ function editGoal(id, row)
         goalInput.removeAttribute('hidden');
 
         goalInput.value = goalSpan.innerHTML;
+        goalInput.setSelectionRange(0, goalInput.value.length);
 
-        const end = goalInput.value.length;
-        goalInput.setSelectionRange(end, end);
         goalInput.focus();
 
-        goalInput.addEventListener('keypress', function(event) {
-            if (goalInput.value == '' && event.key === 'Enter') {
+        if (goalInput.getAttribute('data-listeners-added') !== 'true') {
+            goalInput.addEventListener('focusout', (event) => {
                 event.preventDefault();
                 updateGoal(id, row);
-            }
-        });
+            });
+
+            goalInput.addEventListener('keypress', function(event) {
+                if (goalInput.value === goalSpan.innerHTML && event.key === 'Enter') {
+                    goalInput.setAttribute('hidden', '');
+                    goalSpan.removeAttribute('hidden');
+                }
+            });
+
+            goalInput.setAttribute('data-listeners-added', 'true');
+        }
     }
 }
 
@@ -52,6 +60,7 @@ function updateGoal(id, row)
                 updateDatabase_delete(id, row);
                 updateAllMedals(id);
                 updateStats(id);
+                // location.reload();
             }
         }
     }
@@ -89,12 +98,21 @@ function newGoal(id)
 
         goalInput.focus();
 
-        goalInput.addEventListener('keypress', function(event) {
-            if (goalInput.value == '' && event.key === 'Enter') {
-                event.preventDefault();
-                addGoal(id);
-            }
-        });
+        if (goalInput.getAttribute('data-listeners-added') !== 'true') {
+            goalInput.addEventListener('focusout', () => {
+                goalInput.setAttribute('hidden', '');
+                goalButton.removeAttribute('hidden');
+            });
+
+            goalInput.addEventListener('keypress', function(event) {
+                if (goalInput.value === '' && event.key === 'Enter') {
+                    goalInput.setAttribute('hidden', '');
+                    goalButton.removeAttribute('hidden');
+                }
+            });
+
+            goalInput.setAttribute('data-listeners-added', 'true');
+        }
     }
 }
 
@@ -108,14 +126,8 @@ function addGoal(id)
         goalInput = td.querySelector('input');
         goalInput.setAttribute('hidden', '');
 
-        if (goalInput.value != '') {
-
-            // insert new goal to the table
-
-            updateDatabase_newGoal(id, goalInput.value);
-            updateAllMedals(id);
-            updateStats(id);
-        }
+        updateDatabase_newGoal(id, goalInput.value);
+        location.reload();
     }
 }
 

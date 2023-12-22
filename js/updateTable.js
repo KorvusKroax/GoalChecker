@@ -70,7 +70,7 @@ function updateStats(id)
         tableContainer.querySelector('.stats h1').innerHTML = Math.floor(total / count * 100.0) + '%';
 
         // golden border
-        if (total == count) tableContainer.classList.add('goldenBorder');
+        if (total == count && count != 0) tableContainer.classList.add('goldenBorder');
         else tableContainer.classList.remove('goldenBorder');
     }
 }

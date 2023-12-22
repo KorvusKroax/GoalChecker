@@ -1,16 +1,15 @@
 <?php
-    $totalChecked = 0;
-    $checkboxCount = 0;
+    $totalChecked = $checkboxCount = 0;
     foreach ($checkerTable['goals'] as $goal) {
         foreach ($goal['days'] as $day) {
             if ($day) $totalChecked++;
             $checkboxCount++;
         }
     }
-    $getGoldenBorder = $totalChecked == $checkboxCount;
+    $getGoldenBorder = $totalChecked == $checkboxCount && $checkboxCount != 0;
 
-    foreach ($checkerTable['goals'][0]['days'] as $day => $checked) {
-        $getMedal[$day] = true;
+    foreach ($weekDays as $day => $translation) {
+        $getMedal[$day] = $checkboxCount != 0;
     }
 
     $caption = explode('/', $checkerTable['caption']);
@@ -28,8 +27,8 @@
 
         <thead>
             <th></th>
-            <?php foreach ($checkerTable['goals'][0]['days'] as $day => $checked)  {
-                echo '<th'.($today == $day ? ' class="today"' : '').'>'.$weekDays[$day].'</th>';
+            <?php foreach ($weekDays as $day => $translation)  {
+                echo '<th'.($today == $day ? ' class="today"' : '').'>'.$translation.'</th>';
             } ?>
             <th></th>
         </thead>
@@ -68,10 +67,10 @@
 
             <tr>
                 <td class="newGoal">
-                    <button <?= !$editable ? 'hidden' : '' ?> class="full" onClick="newGoal(<?= $checkerTable['id'] ?>)">ÚJ</button>
+                    <button <?= !$editable ? 'hidden' : '' ?> class="full" onClick="newGoal(<?= $checkerTable['id'] ?>)">Új cél</button>
                     <input hidden type="text" onChange="addGoal(<?= $checkerTable['id'] ?>)">
                 </td>
-                <?php foreach ($checkerTable['goals'][0]['days'] as $day => $checked) : ?>
+                <?php foreach ($weekDays as $day => $translation) : ?>
                     <td class="medal <?= $today == $day ? 'today' : '' ?>" data-day="<?= $day ?>">
                         <span <?= !$getMedal[$day] ? 'hidden' : '' ?>><img src="img/medal.svg" alt="medal"></span>
                     </td>
@@ -83,6 +82,6 @@
 
     <hr>
     <div class="stats">
-        Teljesítmény:<h1><?= floor(($totalChecked / $checkboxCount) * 100) ?>%</h1>
+        Teljesítmény:<h1><?= $checkboxCount ? floor(($totalChecked / $checkboxCount) * 100) : 0 ?>%</h1>
     </div>
 </div>
