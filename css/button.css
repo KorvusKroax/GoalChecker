@@ -1,5 +1,5 @@
 button {
-    margin-inline: .5em;
+    margin: .5em;
     padding: .5em 1.5em;
     background-color: rgb(210, 210, 210);
     white-space: nowrap;

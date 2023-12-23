@@ -1,15 +1,9 @@
 <?php
+    session_start();
+    // $_SESSION['user']['name'] = 'valaki';
+    // $_SESSION['user']['table'] = strtolower($_SESSION['user']['name']);
+
     require('db_init.php');
-
-    $date = date('Y. F/W');
-    $today = strtolower(date('D'));
-
-    $allTables = getAllCheckerTables();
-
-    if ($allTables[0]['caption'] != $date) {
-        createNewTableBasedOnLastTable($date);
-        $allTables = getAllCheckerTables();
-    }
 ?>
 
 
@@ -35,23 +29,33 @@
         <title>GoalChecker</title>
     </head>
     <body>
-        <header></header>
-
-        <main>
-            <div class="container">
-                <?php
-                    $editable = true;
-                    $checkerTable = array_shift($allTables);
-                    require('checkerTable.php');
-
-                    $editable = false;
-                    foreach ($allTables as $checkerTable) {
-                        require('checkerTable.php');
-                    }
-                ?>
-            </div>
-        </main>
-
-        <footer></footer>
+        <?php if (!isset($_SESSION["user"])) : ?>
+            <main>
+                <div class="container">
+                    <form method="post" action="login.php">
+                        <div>
+                            <span>név:</span><br>
+                            <input type="text" name="name" value="<?= isset($_SESSION["login"]["name"]) ? $_SESSION["login"]["name"] : "" ?>" required>
+                        </div>
+                        <div>
+                            <span>jelszó:</span><br>
+                            <input type="password" name="password" value="<?= isset($_SESSION["login"]["password"]) ? $_SESSION["login"]["password"] : "" ?>" required>
+                        </div>
+                        <div class="actions">
+                            <button type="submit" name="login">belépés</button>
+                            <a href="signup.php">regisztráció</a>
+                        </div>
+                    </form>
+                    <?php
+                        if (isset($_SESSION["login"]["error"])) {
+                            echo "<span class='error'>" . $_SESSION["login"]["error"] . "</span><br>";
+                            unset($_SESSION["login"]["error"]);
+                        }
+                    ?>
+                </div>
+            </main>
+        <?php else : ?>
+            <?php require('home.php'); ?>
+        <?php endif; ?>
     </body>
 </html>

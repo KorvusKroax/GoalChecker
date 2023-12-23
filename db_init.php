@@ -7,6 +7,9 @@
     define('DB_USER','root');
     define('DB_PASSWORD','');
 
+    const MIN_NAME_LENGTH = 3;
+    const MIN_PASSWORD_LENGTH = 3;
+
     require('db_functions.php');
 
     $weekDays = ['mon' => 'H', 'tue' => 'K', 'wed' => 'SZ', 'thu' => 'CS', 'fri' => 'P', 'sat' => 'SZ', 'sun' => 'V'];
@@ -17,28 +20,32 @@
 
     if (!isDatabaseExists()) createDatabase();
 
-    if (!isTableExists('checker_tables')) createCheckerTablesTable();
+    if (!isTableExists("users")) createUsersTable();
+    if (empty(getAllUsers())) addUser('admin', 'admin');
 
-    if (empty(getAllCheckerTables())) {
-        $lastColorIndex = 0;
-        addCheckerTable([
-            'caption' => date('Y. F/W'),
-            'goals' => [
-                [
-                    'goal' => 'első napi cél',
-                    'colorIndex' => ($lastColorIndex++) % count($colors),
-                    'days' => ['mon' => false, 'tue' => false, 'wed' => false, 'thu' => false, 'fri' => false, 'sat' => false, 'sun' => false]
-                ],
-                [
-                    'goal' => 'második napi cél',
-                    'colorIndex' => ($lastColorIndex++) % count($colors),
-                    'days' => ['mon' => false, 'tue' => false, 'wed' => false, 'thu' => false, 'fri' => false, 'sat' => false, 'sun' => false]
-                ],
-                [
-                    'goal' => 'sokadik napi cél',
-                    'colorIndex' => ($lastColorIndex++) % count($colors),
-                    'days' => ['mon' => false, 'tue' => false, 'wed' => false, 'thu' => false, 'fri' => false, 'sat' => false, 'sun' => false]
+    if (isset($_SESSION["user"])) {
+        if (!isTableExists($_SESSION['user']['table'])) createCheckerTablesTable();
+        if (empty(getAllCheckerTables())) {
+            $lastColorIndex = 0;
+            addCheckerTable([
+                'caption' => date('Y. F/W'),
+                'goals' => [
+                    [
+                        'goal' => 'első napi cél',
+                        'colorIndex' => ($lastColorIndex++) % count($colors),
+                        'days' => ['mon' => false, 'tue' => false, 'wed' => false, 'thu' => false, 'fri' => false, 'sat' => false, 'sun' => false]
+                    ],
+                    [
+                        'goal' => 'második napi cél',
+                        'colorIndex' => ($lastColorIndex++) % count($colors),
+                        'days' => ['mon' => false, 'tue' => false, 'wed' => false, 'thu' => false, 'fri' => false, 'sat' => false, 'sun' => false]
+                    ],
+                    [
+                        'goal' => 'sokadik napi cél',
+                        'colorIndex' => ($lastColorIndex++) % count($colors),
+                        'days' => ['mon' => false, 'tue' => false, 'wed' => false, 'thu' => false, 'fri' => false, 'sat' => false, 'sun' => false]
+                    ]
                 ]
-            ]
-        ]);
+            ]);
+        }
     }
