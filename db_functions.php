@@ -86,12 +86,12 @@
             return 'érvénytelen név (csak betűk, számok, szóköz, aláhúzás és pont használható)';
         }
 
-        if (!empty($user = getUserByName($name))) {
+        if (!empty(getUserByName($name))) {
             return 'ezen a néven már létezik felhasználó';
         }
     }
 
-    function validatePassword($password, $retype_password)
+    function validatePassword($password, $rePassword)
     {
         if (empty($password)) {
             return 'nincs jelszó megadva';
@@ -101,7 +101,7 @@
             return 'túl rövid jelszó (min: ' . MIN_PASSWORD_LENGTH . ' karakter)';
         }
 
-        if ($password !== $retype_password) {
+        if ($password !== $rePassword) {
             return 'a két jelszó nem egyezik';
         }
     }
@@ -109,15 +109,15 @@
     function validateLogin($name, $password)
     {
         if (empty($name) || empty($password)) {
-            return 'érvénytelen név/jelszó'; // log: nincs név/jelszó megadva
+            return 'nincs név/jelszó megadva';
         }
 
         if (empty($user = getUserByName($name))) {
-            return 'érvénytelen név/jelszó'; // log: nem létezik ilyen néven felhasználó
+            return 'nincs ilyen nevű felhasználó';
         }
 
         if (!password_verify($password, $user['password'])) {
-            return 'érvénytelen név/jelszó'; // log: nem megfelelő jelszó
+            return 'nem megfelelő jelszó';
         }
     }
 

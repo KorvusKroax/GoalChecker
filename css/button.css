@@ -1,15 +1,17 @@
 button {
     margin: .5em;
     padding: .5em 1.5em;
-    background-color: rgb(210, 210, 210);
+    background-color: lightgray;
     white-space: nowrap;
     border: none;
     border-radius: .25em;
     cursor: pointer;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
 }
 
 button:hover {
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(32, 160, 128);
+    color: white;
 }
 
 button.large {

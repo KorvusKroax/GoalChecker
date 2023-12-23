@@ -5,7 +5,6 @@
     if (isset($_POST['login'])) {
         if (($_SESSION['error'] = validateLogin($name, $password)) == null) {
             $_SESSION['user'] = getUserByName($name);
-            unset($_SESSION['login']);
             header('location: index.php');
             exit();
         }
@@ -14,30 +13,24 @@
 
 
 
-<?php require('header.php'); ?>
+<?php $headerText = 'Jelentkezz be!'; require('header.php'); ?>
 
 <main>
     <div class="container">
         <form method="post">
             <div>
                 <span>név:</span><br>
-                <input type="text" name="name" value="<?= isset($name) ? $name : "" ?>" required>
+                <input type="text" name="name" value="<?= isset($name) ? $name : "" ?>">
             </div>
             <div>
                 <span>jelszó:</span><br>
-                <input type="password" name="password" value="<?= isset($password) ? $password : "" ?>" required>
+                <input type="password" name="password" value="<?= isset($password) ? $password : "" ?>">
             </div>
             <div class="actions">
                 <button type="submit" name="login">Belépés</button>
                 <a href="signup.php">Regisztráció</a>
             </div>
         </form>
-        <?php
-            if (isset($_SESSION['error'])) {
-                echo '<br><span class="error">' . $_SESSION['error'] . '</span><br>';
-                unset($_SESSION['error']);
-            }
-        ?>
     </div>
 </main>
 

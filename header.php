@@ -28,7 +28,14 @@
                         <button onClick="location.href='logout.php'">Kilépés</button>
                     </div>
                 <?php else : ?>
-                    <h1>Jelentkezz be!</h1>
+                    <h1><?= $headerText ?></h1>
                 <?php endif; ?>
             </div>
         </header>
+
+        <?php
+            if (isset($_SESSION['error'])) {
+                echo '<br><span class="error">' . $_SESSION['error'] . '</span>';
+                unset($_SESSION['error']);
+            }
+        ?>
