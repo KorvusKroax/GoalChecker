@@ -82,8 +82,8 @@
             return 'túl rövid név (min: ' . MIN_NAME_LENGTH . ' karakter)';
         }
 
-        if (!preg_match('/^[\w\s.]+$/ui', $name)) {
-            return 'érvénytelen név (csak betűk, számok, szóköz, aláhúzás és pont használható)';
+        if (!preg_match('/^[\w]+$/ui', $name)) {
+            return 'érvénytelen név (csak betűk, számok és aláhúzás használható)';
         }
 
         if (!empty(getUserByName($name))) {

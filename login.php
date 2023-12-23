@@ -19,7 +19,7 @@
     <div class="container">
         <form method="post">
             <div>
-                <span>név:</span><br>
+                <span>felhasználó név:</span><br>
                 <input type="text" name="name" value="<?= isset($name) ? $name : "" ?>">
             </div>
             <div>
