@@ -1,13 +1,15 @@
 <?php
 
-    define("DB_DRIVER", "mysql");
-    define("DB_NAME", "checker");
-    // define("DB_HOST", "optometeroptika.hu");
-    // define("DB_USER", "vr69qz86");
-    // define("DB_PASSWORD", "Hd1r-X}}Nd");
-    define("DB_HOST", "localhost");
-    define("DB_USER", "root");
-    define("DB_PASSWORD", "");
+    define('DB_DRIVER','mysql');
+    define('DB_NAME','checker');
+    // define('DB_HOST','mysql80.r3.websupport.hu');
+    // define('DB_PORT','3314');
+    // define('DB_USER','vr69qz86');
+    // define('DB_PASSWORD','Hd1r-X}}Nd');
+    define('DB_HOST','localhost');
+    define('DB_PORT','');
+    define('DB_USER','root');
+    define('DB_PASSWORD','');
 
     require('db_functions.php');
 
@@ -19,7 +21,7 @@
 
     if (!isDatabaseExists()) createDatabase();
 
-    if (!isTableExists("checker_tables")) createCheckerTablesTable();
+    if (!isTableExists('checker_tables')) createCheckerTablesTable();
 
     if (empty(getAllCheckerTables())) {
         $lastColorIndex = 0;

@@ -42,10 +42,10 @@
                     </td>
 
                     <?php $getTrophy = true; ?>
-                    <?php foreach ($goal['days'] as $day => $checked) : ?>
+                    <?php foreach ($weekDays as $day => $translation) : ?>
                         <td class="checkbox <?= $today == $day ? 'today' : '' ?>">
                             <label>
-                                <input type="checkbox" <?= $checked ? 'checked' : '' ?>
+                                <input type="checkbox" <?= $goal['days'][$day] ? 'checked' : '' ?>
                                     data-row="<?= $row ?>"
                                     data-day="<?= $day ?>"
                                     onChange="updateCheckbox(<?= $checkerTable['id'] ?>, <?= $row ?>, '<?= $day ?>')">
@@ -54,8 +54,8 @@
                         </td>
 
                         <?php
-                            $getTrophy = $getTrophy && $checked;
-                            $getMedal[$day] = $getMedal[$day] && $checked;
+                            $getTrophy = $getTrophy && $goal['days'][$day];
+                            $getMedal[$day] = $getMedal[$day] && $goal['days'][$day];
                         ?>
                     <?php endforeach; ?>
 
