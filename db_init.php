@@ -1,5 +1,7 @@
 <?php
 
+    session_start();
+
     define('DB_DRIVER','mysql');
     define('DB_NAME','checker');
     define('DB_HOST','localhost');
@@ -24,7 +26,7 @@
     if (empty(getAllUsers())) addUser('admin', 'admin');
 
     if (isset($_SESSION["user"])) {
-        if (!isTableExists($_SESSION['user']['table'])) createCheckerTablesTable();
+        if (!isTableExists($_SESSION['user']['table_name'])) createCheckerTablesTable();
         if (empty(getAllCheckerTables())) {
             $lastColorIndex = 0;
             addCheckerTable([

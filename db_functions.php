@@ -43,6 +43,7 @@
                 id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
                 name VARCHAR(255) NOT NULL,
                 password VARCHAR(255) NOT NULL,
+                table_name VARCHAR(255) NOT NULL,
                 created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                 modified TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
             )'
@@ -63,9 +64,10 @@
     function addUser($name, $password)
     {
         dbQuery(
-            'INSERT INTO users (name, password) VALUES (:name, :password)', [
+            'INSERT INTO users (name, password, table_name) VALUES (:name, :password, :tableName)', [
                 'name' => $name,
-                'password' => password_hash($password, PASSWORD_DEFAULT)
+                'password' => password_hash($password, PASSWORD_DEFAULT),
+                'tableName' => strtolower($name).rand()
             ]
         );
     }
@@ -124,7 +126,7 @@
     function createCheckerTablesTable()
     {
         dbQuery(
-            'CREATE TABLE ' . $_SESSION['user']['table'] . ' (
+            'CREATE TABLE ' . $_SESSION['user']['table_name'] . ' (
                 id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
                 caption VARCHAR(255) NOT NULL,
                 goals JSON NOT NULL,
@@ -137,7 +139,7 @@
     function getAllCheckerTables()
     {
         $results = dbQuery(
-            'SELECT * FROM ' . $_SESSION['user']['table'] . ' ORDER BY created DESC'
+            'SELECT * FROM ' . $_SESSION['user']['table_name'] . ' ORDER BY created DESC'
         );
 
         if ($results) {
@@ -152,7 +154,7 @@
     function getCheckerTableById($id)
     {
         $result = dbQuery(
-            'SELECT * FROM ' . $_SESSION['user']['table'] . ' WHERE id = :id LIMIT 1',
+            'SELECT * FROM ' . $_SESSION['user']['table_name'] . ' WHERE id = :id LIMIT 1',
             ['id' => $id]
         )[0];
 
@@ -166,7 +168,7 @@
     function addCheckerTable($checkerTable)
     {
         dbQuery(
-            'INSERT INTO ' . $_SESSION['user']['table'] . ' (caption, goals) VALUES (:caption, :goals)', [
+            'INSERT INTO ' . $_SESSION['user']['table_name'] . ' (caption, goals) VALUES (:caption, :goals)', [
                 'caption' => $checkerTable['caption'],
                 'goals' => json_encode($checkerTable['goals'])
             ]
@@ -176,7 +178,7 @@
     function updateCheckerTable($id, $checkerTable)
     {
         dbQuery(
-            'UPDATE ' . $_SESSION['user']['table'] . ' SET caption = :caption, goals = :goals WHERE id = :id LIMIT 1', [
+            'UPDATE ' . $_SESSION['user']['table_name'] . ' SET caption = :caption, goals = :goals WHERE id = :id LIMIT 1', [
                 'id' => $id,
                 'caption' => $checkerTable['caption'],
                 'goals' => json_encode($checkerTable['goals'])
@@ -187,7 +189,7 @@
     function deleteCheckerTable($id)
     {
         dbQuery(
-            'DELETE FROM ' . $_SESSION['user']['table'] . ' WHERE id = :id LIMIT 1',
+            'DELETE FROM ' . $_SESSION['user']['table_name'] . ' WHERE id = :id LIMIT 1',
             ['id' => $id]
         );
     }
@@ -206,4 +208,15 @@
             'caption' => $date,
             'goals' => $goals
         ]);
+    }
+
+
+
+
+
+    function show($value)
+    {
+        echo '<pre>';
+        echo print_r($value, true);
+        echo '</pre>';
     }

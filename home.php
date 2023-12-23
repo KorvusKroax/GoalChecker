@@ -1,5 +1,4 @@
 <?php
-    require('db_init.php');
 
     $date = date('Y. F/W');
     $today = strtolower(date('D'));
@@ -14,11 +13,7 @@
 
 
 
-<header>
-    <div class="container">
-        <h1>Hello, <?= $_SESSION['user']['name'] ?>!</h1>
-    </div>
-</header>
+<?php require('header.php'); ?>
 
 <main>
     <div class="container">
@@ -35,4 +30,4 @@
     </div>
 </main>
 
-<!-- <footer></footer> -->
+<?php require('footer.php'); ?>
