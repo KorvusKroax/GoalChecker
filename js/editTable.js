@@ -22,7 +22,7 @@ function editGoal(id, row)
 
         goalInput.focus();
 
-        if (goalInput.getAttribute('data-listeners-added') !== 'true') {
+        if (goalInput.dataset.has_listeners !== 'true') {
             goalInput.addEventListener('focusout', (event) => {
                 event.preventDefault();
                 updateGoal(id, row);
@@ -35,7 +35,7 @@ function editGoal(id, row)
                 }
             });
 
-            goalInput.setAttribute('data-listeners-added', 'true');
+            goalInput.setAttribute('data-has_listeners', 'true');
         }
     }
 }
@@ -96,7 +96,7 @@ function newGoal(id)
 
         goalInput.focus();
 
-        if (goalInput.getAttribute('data-listeners-added') !== 'true') {
+        if (goalInput.dataset.has_listeners !== 'true') {
             goalInput.addEventListener('focusout', () => {
                 goalInput.setAttribute('hidden', '');
                 goalButton.removeAttribute('hidden');
@@ -109,7 +109,7 @@ function newGoal(id)
                 }
             });
 
-            goalInput.setAttribute('data-listeners-added', 'true');
+            goalInput.setAttribute('data-has_listeners', 'true');
         }
     }
 }

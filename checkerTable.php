@@ -9,8 +9,10 @@
     $getGoldenBorder = $totalChecked == $checkboxCount && $checkboxCount != 0;
 
     foreach ($weekDays as $day => $translation) {
-        $getMedal[$day] = $checkboxCount != 0;
+        $dailyTotalChecked[$day] = 0;
     }
+    $goalCount = count($checkerTable['goals']);
+    $dayCount = count($weekDays);
 
     $caption = explode('/', $checkerTable['caption']);
 ?>
@@ -41,7 +43,7 @@
                         <input hidden type="text" value="<?= $goal['goal'] ?>" onChange="updateGoal(<?= $checkerTable['id'] ?>, <?= $row ?>)">
                     </td>
 
-                    <?php $getTrophy = true; ?>
+                    <?php $goalTotalChecked = 0; ?>
                     <?php foreach ($weekDays as $day => $translation) : ?>
                         <td class="checkbox <?= $today == $day ? 'today' : '' ?>">
                             <label>
@@ -54,13 +56,20 @@
                         </td>
 
                         <?php
-                            $getTrophy = $getTrophy && $goal['days'][$day];
-                            $getMedal[$day] = $getMedal[$day] && $goal['days'][$day];
+                            if ($goal['days'][$day])  {
+                                $goalTotalChecked++;
+                                $dailyTotalChecked[$day]++;
+                            }
                         ?>
                     <?php endforeach; ?>
 
                     <td class="trophy" data-row="<?= $row ?>">
-                        <span <?= !$getTrophy ? 'hidden' : '' ?>><img src="img/trophy.svg" alt="trophy"></span>
+                        <span <?= $goalTotalChecked != $dayCount ? 'hidden' : '' ?> class="goalAward">
+                            <img src="img/trophy.svg" alt="trophy">
+                        </span>
+                        <span <?= $goalTotalChecked == $dayCount ? 'hidden' : '' ?> class="goalStat">
+                            <?= floor(($goalTotalChecked / $dayCount) * 100) . '%' ?>
+                        </span>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -72,7 +81,12 @@
                 </td>
                 <?php foreach ($weekDays as $day => $translation) : ?>
                     <td class="medal <?= $today == $day ? 'today' : '' ?>" data-day="<?= $day ?>">
-                        <span <?= !$getMedal[$day] ? 'hidden' : '' ?>><img src="img/medal.svg" alt="medal"></span>
+                        <span <?= $dailyTotalChecked[$day] != $goalCount || $goalCount == 0 ? 'hidden' : '' ?> class="dailyAward">
+                            <img src="img/medal.svg" alt="medal">
+                        </span>
+                        <span <?= $dailyTotalChecked[$day] == $goalCount && $goalCount != 0 ? 'hidden' : '' ?> class="dailyStat">
+                            <?= $goalCount ? floor(($dailyTotalChecked[$day] / $goalCount) * 100) . '%' : '' ?>
+                        </span>
                     </td>
                 <?php endforeach; ?>
                 <td></td>

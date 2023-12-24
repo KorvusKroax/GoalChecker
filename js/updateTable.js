@@ -18,13 +18,22 @@ function updateMedal(id, day)
 {
     table = document.querySelector('[data-id="' + id + '"] table');
     if (table) {
-        dayFull = true;
+        total = count = 0;
         table.querySelectorAll('[data-row][data-day="' + day + '"]').forEach((checkbox) => {
-            if (!checkbox.checked) dayFull = false;
+            if (checkbox.checked) total++;
+            count++;
         });
-        medal = table.querySelector('.medal[data-day="' + day + '"] span');
-        if (dayFull) medal.removeAttribute('hidden');
-        else medal.setAttribute('hidden', '');
+
+        dailyAward = table.querySelector('.medal[data-day="' + day + '"] .dailyAward');
+        dailyStat = table.querySelector('.medal[data-day="' + day + '"] .dailyStat');
+        if (total == count && count != 0) {
+            dailyAward.removeAttribute('hidden');
+            dailyStat.setAttribute('hidden', '');
+        } else {
+            dailyAward.setAttribute('hidden', '');
+            dailyStat.removeAttribute('hidden');
+            dailyStat.innerHTML = Math.floor(total / count * 100.0) + '%';
+        }
     }
 }
 
@@ -32,13 +41,22 @@ function updateTrophy(id, row)
 {
     table = document.querySelector('[data-id="' + id + '"] table');
     if (table) {
-        rowFull = true;
+        total = count = 0;
         table.querySelectorAll('[data-row="' + row + '"][data-day]').forEach((checkbox) => {
-            if (!checkbox.checked) rowFull = false;
+            if (checkbox.checked) total++;
+            count++;
         });
-        trophy = table.querySelector('.trophy[data-row="' + row + '"] span');
-        if (rowFull) trophy.removeAttribute('hidden');
-        else trophy.setAttribute('hidden', '');
+
+        goalAward = table.querySelector('.trophy[data-row="' + row + '"] .goalAward');
+        goalStat = table.querySelector('.trophy[data-row="' + row + '"] .goalStat');
+        if (total == count && count != 0) {
+            goalAward.removeAttribute('hidden');
+            goalStat.setAttribute('hidden', '');
+        } else {
+            goalAward.setAttribute('hidden', '');
+            goalStat.removeAttribute('hidden');
+            goalStat.innerHTML = Math.floor(total / count * 100.0) + '%';
+        }
     }
 }
 
