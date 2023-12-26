@@ -38,9 +38,13 @@
         <tbody>
             <?php foreach ($checkerTable['goals'] as $row => $goal) : ?>
                 <tr data-row="<?= $row ?>">
-                    <td class="goal" onClick="editGoal(<?= $checkerTable['id'] ?>, <?= $row ?>)">
-                        <span><?= $goal['goal'] ?></span>
-                        <input hidden type="text" value="<?= $goal['goal'] ?>" onChange="updateGoal(<?= $checkerTable['id'] ?>, <?= $row ?>)">
+                    <td class="goal">
+                        <?php if ($editable) : ?>
+                            <span onClick="editGoal(<?= $checkerTable['id'] ?>, <?= $row ?>)"><?= $goal['goal'] ?></span>
+                            <input hidden type="text" value="<?= $goal['goal'] ?>" onChange="updateGoal(<?= $checkerTable['id'] ?>, <?= $row ?>)">
+                        <?php else : ?>
+                            <span><?= $goal['goal'] ?></span>
+                        <?php endif; ?>
                     </td>
 
                     <?php $goalTotalChecked = 0; ?>
@@ -76,8 +80,10 @@
 
             <tr>
                 <td class="newGoal">
-                    <button <?= !$editable ? 'hidden' : '' ?> class="full" onClick="newGoal(<?= $checkerTable['id'] ?>)">Új cél</button>
-                    <input hidden type="text" onChange="addGoal(<?= $checkerTable['id'] ?>)">
+                    <?php if ($editable) : ?>
+                        <button class="full" onClick="newGoal(<?= $checkerTable['id'] ?>)">Új cél</button>
+                        <input hidden type="text" onChange="addGoal(<?= $checkerTable['id'] ?>)">
+                    <?php endif; ?>
                 </td>
                 <?php foreach ($weekDays as $day => $translation) : ?>
                     <td class="medal <?= $today == $day ? 'today' : '' ?>" data-day="<?= $day ?>">
