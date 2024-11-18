@@ -14,6 +14,8 @@
         <link rel="stylesheet" href="css/table.css">
         <link rel="stylesheet" href="css/checkbox.css">
 
+        <link rel="stylesheet" href="css/checkerNote.css">
+
         <script src="js/updateTable.js" defer></script>
         <script src="js/editTable.js" defer></script>
 

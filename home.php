@@ -16,6 +16,9 @@
 <?php require('header.php'); ?>
 
 <main>
+
+    <?php require('checkerNote.php'); ?>
+
     <div class="container">
         <?php
             $editable = true;

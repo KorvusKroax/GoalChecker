@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Homemade+Apple&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap');
+
+:root {
+    --square: 1.5rem;
+
+    --halfSquare: calc(var(--square) * .5);
+    --doubleSquare: calc(var(--square) * 2);
+}
+
+.checkerNote {
+    width: calc(26 * var(--square));
+    margin-inline: auto;
+    margin-bottom: 3rem;
+    padding: 1.75rem;
+
+    background-image: url("../img/grid-paper-mod.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    box-shadow: rgb(38, 57, 77) 0px 10px 20px -10px;
+
+    font-family: "Homemade Apple", cursive;
+    /* font-family: "Caveat", cursive;
+    font-optical-sizing: auto; */
+    font-size: calc(var(--square) * .7);
+    font-weight: 500;
+
+    color: black;
+
+    line-height: var(--square);
+
+    transform: rotateZ(1deg);
+}
+
+.checkerNote .noteCaption {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+}
+
+
+
+.checkerNote .noteGrid {
+    display: grid;
+    grid-template-columns:
+        calc(9 * var(--square)) var(--doubleSquare) var(--doubleSquare) var(--doubleSquare) var(--doubleSquare) var(--doubleSquare) var(--doubleSquare) var(--doubleSquare);
+}
+
+.checkerNote .weekDay{
+    margin-block: var(--halfSquare);
+
+    font-weight: 600;
+    font-size: var(--square);
+}
+
+.checkerNote .dailyGoals{
+    padding-inline: var(--halfSquare);
+
+    color: rgb(62, 62, 223);
+
+    /* text-align: right; */
+    hyphens: auto;
+    white-space: nowrap;
+}
+
+.checkerNote .checkbox {
+    margin-block: -.25rem .25rem;
+    margin-inline: -.85rem .85rem;
+    background-image: url("../img/checkbox.png");
+    background-position: 50% 0%;
+    background-repeat: no-repeat;
+    background-size: 55%;
+}
+
+.checkerNote .checkbox.rotated {
+    transform: rotateZ(3deg);
+}
+
+.checkerNote .checkbox:hover {
+    background-color: red;;
+}
