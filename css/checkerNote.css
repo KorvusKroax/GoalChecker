@@ -6,6 +6,8 @@
 
     --halfSquare: calc(var(--square) * .5);
     --doubleSquare: calc(var(--square) * 2);
+
+    --inkBlueColor: rgb(62, 62, 223);
 }
 
 .checkerNote {
@@ -44,11 +46,12 @@
 .checkerNote .noteGrid {
     display: grid;
     grid-template-columns:
-        calc(9 * var(--square)) var(--doubleSquare) var(--doubleSquare) var(--doubleSquare) var(--doubleSquare) var(--doubleSquare) var(--doubleSquare) var(--doubleSquare);
+        calc(9 * var(--square)) var(--doubleSquare) var(--doubleSquare) var(--doubleSquare) var(--doubleSquare) var(--doubleSquare) var(--doubleSquare) var(--doubleSquare) var(--square);
 }
 
 .checkerNote .weekDay{
     margin-block: var(--halfSquare);
+    margin-inline: -.85rem .85rem;
 
     font-weight: 600;
     font-size: var(--square);
@@ -57,9 +60,9 @@
 .checkerNote .dailyGoals{
     padding-inline: var(--halfSquare);
 
-    color: rgb(62, 62, 223);
+    color: var(--inkBlueColor);
 
-    /* text-align: right; */
+    text-align: left;
     hyphens: auto;
     white-space: nowrap;
 }
@@ -71,6 +74,12 @@
     background-position: 50% 0%;
     background-repeat: no-repeat;
     background-size: 55%;
+}
+
+.checkerNote .dailyPercent {
+    margin-inline: -.2rem .2rem;
+    font-size: var(--halfSquare);
+    color: var(--inkBlueColor);
 }
 
 .checkerNote .checkbox.rotated {

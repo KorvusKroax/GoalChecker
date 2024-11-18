@@ -14,7 +14,7 @@
 
     require('db_functions.php');
 
-    $weekDays = ['mon' => 'H', 'tue' => 'K', 'wed' => 'SZ', 'thu' => 'CS', 'fri' => 'P', 'sat' => 'SZ', 'sun' => 'V'];
+    $weekDays = ['mon' => 'H', 'tue' => 'K', 'wed' => 'Sz', 'thu' => 'Cs', 'fri' => 'P', 'sat' => 'Sz', 'sun' => 'V'];
 
     $colors = ['#CC99C9', '#9EC1CF', '#9EE09E', '#FDFD97', '#FEB144', '#FF6663'];
 

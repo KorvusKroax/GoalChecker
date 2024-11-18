@@ -16,10 +16,14 @@
 <?php require('header.php'); ?>
 
 <main>
-
-    <?php require('checkerNote.php'); ?>
-
     <div class="container">
+
+        <?php
+            $editable = true;
+            $checkerTable = $allTables[0];
+            require('checkerNote.php');
+        ?>
+
         <?php
             $editable = true;
             $checkerTable = array_shift($allTables);
